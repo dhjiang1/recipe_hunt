@@ -1,0 +1,1 @@
+export const max_number_recipe_results = 10;
