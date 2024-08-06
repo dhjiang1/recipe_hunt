@@ -3,6 +3,7 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import formatLinks from '@app/helperFunctions/formatLinks';
 
 const Results = () => {
   const [response, setResponse] = useState<string[]>([]);
@@ -10,7 +11,6 @@ const Results = () => {
   const searchParams = useSearchParams();
   const ingredients = searchParams.get('ingredients');
 
-  // WIP
   useEffect(() => {
     if (!ingredients) {
       return;
@@ -38,7 +38,7 @@ const Results = () => {
     <div style={{ padding: '20px' }}>
       <h1>Recipes</h1>
       <div style={{ marginTop: '20px', whiteSpace: 'pre-wrap' }}>
-      {response.map(r => <p>{r.link as unknown as string}</p>)}
+      {response.length != 1 ? formatLinks((response.map(r => r.link as unknown as string))) : <p>No recipes with those ingredients</p>}
       </div>
     </div>
   );
